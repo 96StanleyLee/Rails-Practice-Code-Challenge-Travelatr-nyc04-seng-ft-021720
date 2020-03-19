@@ -31,19 +31,9 @@
 
 <% hash = {}%>
 
-<% @blogger.destinations.each do |destination|%>
-
-    <% if hash[destination.name] != nil%>
-    <% hash[destination.name] += 1 %>
-<% else %>
-    <% hash[destination.name] = 1%>
-    <%end%>
-<%end%>
-
-<% x =  hash.sort_by {|k,v| -v}%>
-
-<% y = x.first(5)%>
-<% y.each do |k,v|%>
+<% x = @blogger.destinations.group(:name).count.sort_by{|k,v| -v} %> 
+<% x.first(5)%>
 <br>
+<%x.each do |k,v|%>
 <%= k %>
-<%end %>
+<%end%>
