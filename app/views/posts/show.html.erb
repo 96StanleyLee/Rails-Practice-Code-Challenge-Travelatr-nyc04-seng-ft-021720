@@ -1,0 +1,11 @@
+<h1> <%= @post.title %> </h1>
+
+<h2>Posted by: <%= link_to @post.blogger.name, @post.blogger%> </h2>
+
+<h2> Destination: <%= link_to @post.destination.name, @post.destination%>
+
+<h2> Total Likes: <%= @post.likes%>
+
+<%= form_tag post_path(@post.id), method: "patch" do %>
+  <%= submit_tag "Like"%>
+<%end%>

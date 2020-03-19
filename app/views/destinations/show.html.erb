@@ -1,0 +1,36 @@
+<h1><%= @destination.name %></h1>
+
+
+<h1> 5 Most Recent Posts </h1>
+
+<% recent = @destination.posts.last(5)%>
+
+<% recent.each do |posts|%>
+<%= posts.title %>
+<br>
+<%end %>
+
+
+<h1> Featured Blog Post (Most Likes) </h1>
+<% if !@destination.posts.empty?%>
+<% post = @destination.posts.max_by {|x| x.likes}%>
+<%= link_to post.title, post%>
+<%end %>
+
+<h1> Average age of all bloggers! </h1>
+<% if !@destination.bloggers.empty?%>
+<% bloggers = @destination.bloggers.uniq%>
+<%= (bloggers.sum(&:age).to_f / bloggers.count.to_f).round(2)%>
+<% end %>
+
+
+
+
+<h1> People who have blogged about this location! </h1>
+<% if !@destination.bloggers.empty? %>
+    <% x = @destination.bloggers.uniq %>
+    <% x.each do |bloggers| %>
+    <br>
+    <%= link_to bloggers.name, bloggers %>
+    <%end%>
+<% end %>

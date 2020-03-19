@@ -1,0 +1,49 @@
+
+<h1> <%= @blogger.name %> </h1>
+<br>
+<h3> <%= @blogger.bio %></h3>
+
+<% @blogger.posts.each do |post| %>
+<br>
+<%=link_to post.title, post%> <%= post.likes%>
+<% end %>
+
+
+<br>
+<h1> Featured Blog Post </h1>
+<% if !@blogger.posts.empty?%>
+<% post = @blogger.posts.max_by {|x| x.likes}%>
+<%= link_to post.title, post%>
+<% end %>
+
+
+<br>
+
+<h1> Total Likes Count </h1>
+
+<%= @blogger.posts.sum(&:likes)%>
+
+<h1> Top 5 Destinations for me! </h1>
+<% x = @blogger.destinations %>
+<% x.each do |destination| %>
+<% destination %>
+<% end %>
+
+<% hash = {}%>
+
+<% @blogger.destinations.each do |destination|%>
+
+    <% if hash[destination.name] != nil%>
+    <% hash[destination.name] += 1 %>
+<% else %>
+    <% hash[destination.name] = 1%>
+    <%end%>
+<%end%>
+
+<% x =  hash.sort_by {|k,v| -v}%>
+
+<% y = x.first(5)%>
+<% y.each do |k,v|%>
+<br>
+<%= k %>
+<%end %>

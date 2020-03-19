@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+Blogger.destroy_all
+Destination.destroy_all
+Post.destroy_all
+
 30.times do 
   Destination.create({
     name: Faker::GameOfThrones.city,
